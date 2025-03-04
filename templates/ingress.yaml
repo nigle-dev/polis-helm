@@ -6,7 +6,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ .name }}
-  ingressClassName: {{.ingressClassName }}
   namespace: {{ .namespace }}
   labels:
   {{- with .annotations }}
@@ -14,6 +13,7 @@ metadata:
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
+
 {{- if .tls }}
   tls:
   {{- range .tls }}
@@ -25,6 +25,7 @@ spec:
   {{- end }}
 {{- end }}
 {{- range .rules }}
+  ingressClassName: nginx
   rules:
     - host: {{ .hosts | quote }}
       http:

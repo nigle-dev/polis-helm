@@ -3,21 +3,19 @@ kind: ConfigMap
 metadata:
   name: polis-configmap
 data:
-  POSTGRES_PASSWORD: {{ .Values.postgresql.auth.password | default (randAlphaNum 16) }}
-  PARTICIAPI_HOSTNAME: {{ .Values.particiApi.host }}
-  PARTICIAPI_DOMAINNAME: {{ .Values.particiApi.domain }}
-  PARTICIAPI_SECRET_KEY: UJdBgor8luqw-PpoN4pRLy1ZIjWIKw7WMRUDL-YfjT4S
-  PARTICIAPI_CORS_ORIGINS: {{ .Values.particiApiCors }}
-  PARTICIAPI_IDP_API_BASE_URL: https://idp.partici.app/realms/pzh
-  PARTICIAPI_IDP_CLIENT_ID: particiapi
-  PARTICIAPI_IDP_CLIENT_SECRET: {{ .Values.particiApiClientSecret | default (randAlphaNum 32) }}
+  POSTGRES_PASSWORD: {{ .Values.postgresql.auth.password | default (randAlphaNum 16) | quote }}
+  PARTICIAPI_HOSTNAME: {{ .Values.particiApi.host | quote }}
+  PARTICIAPI_DOMAINNAME: {{ .Values.particiApi.domain | quote }}
+  PARTICIAPI_SECRET_KEY: "UJdBgor8luqw-PpoN4pRLy1ZIjWIKw7WMRUDL-YfjT4S"
+  PARTICIAPI_CORS_ORIGINS: {{ .Values.particiApiCors | quote }}
+  PARTICIAPI_IDP_API_BASE_URL: "https://idp.partici.app/realms/pzh"
+  PARTICIAPI_IDP_CLIENT_ID: "particiapi"
+  PARTICIAPI_IDP_CLIENT_SECRET: {{ .Values.particiApiClientSecret | default (randAlphaNum 32) | quote }}
   DATABASE_URL: {{ printf "postgres://%s:%s@%s:5432/%s" .Values.postgresql.auth.username .Values.postgresql.auth.password 
                   .Values.postgresql.auth.hostname .Values.postgresql.auth.database }}
   POSTGRES_USER: {{ .Values.postgresql.auth.username | default "postgres" }}
-  POSTGRES_PORT: '5432'
   POSTGRES_DB: {{ .Values.postgresql.auth.database | default "polis" }}
   POSTGRES_HOST: polis-postgres
-  DEV_MODE: {{ .Values.polis.devmode | default "false" }}
   MATH_ENV: {{ .Values.polis.mathenv | default "prod" }}
   STATIC_FILES_HOST: polis-file-server
   DOMAIN_OVERRIDE: {{ printf "%s.%s" .Values.polis.host .Values.polis.domain }}

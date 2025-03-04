@@ -4,7 +4,7 @@
 
 polis:
   # 
-  host: testurl-polis
+  host: polis-helm
   domain: n8m.nl
   # true or false, false if not specified
   devmode:
@@ -13,11 +13,11 @@ polis:
 
 particiApi:
   # Hostname for the particiapi frontend
-  host: testurl-api
+  host: polis-helm--api
   # Domainname particiapi is running in
   domain: n8m.nl
   # 
-  corsUrl: https://testurl-api.n8m.nl
+  corsUrl: https://polis-helm-api.n8m.nl
   idpUrl: https://sso.n8m.nl/realms/testurl
   idpClientID: test
   idpClientSecret: test
@@ -28,7 +28,7 @@ postgresql:
     username: polis
     password: "123456"
     database: polisdb
-    host: polis-postgres
+    hostname: polis-postgres
     existingSecret: ""
   architecture: standalone
 
@@ -103,11 +103,11 @@ ingresses:
         cert-manager.io/issuer-kind: ClusterIssuer
       tls:
         - hosts: 
-          - my.host.com
-          secretName: tls-my-host.com
+          - polis-helm.n8m.nl
+          secretName: tls-polis-helm-n8m.nl
       rules:
         - hosts: 
-            "my.host.com"            
+            "polis-helm.n8m.nl"            
           http:
             paths:
             - path: /

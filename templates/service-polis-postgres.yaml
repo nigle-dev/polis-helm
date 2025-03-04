@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: polis-postgres
+  name: polis-postgres
+spec:
+  ports:
+  - name: postgres
+    port: 5432
+    protocol: TCP
+    targetPort: 5432
+  selector:
+    name: polis-postgres
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+
