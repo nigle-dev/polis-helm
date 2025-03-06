@@ -9,17 +9,23 @@ polis:
   # true or false, false if not specified
   devmode:
   # can be prod, preprod or dev. prod if not specified
-  mathenv: 
+  mathenv:
+  # both next values need to be the same as that is how pol.is is build for some reason
+  domainOverride: 
+  apiProdHostname: 
+
 
 particiApi:
   # Hostname for the particiapi frontend
   host: polis-helm--api
-  secretKey: 123456
+  secretKey: "123456"
   # Domainname particiapi is running in
   domain: n8m.nl
   # 
   corsUrl: https://polis-helm-api.n8m.nl
+  # Base URL for the OpenID-connect provider (where .well-known lives)
   idpUrl: https://sso.n8m.nl/realms/testurl
+  # When using KeyCloak copy the values from ClienID and Secret here
   idpClientID: test
   idpClientSecret: test
 
@@ -35,7 +41,6 @@ postgresql:
     existingSecret: ""
   architecture: standalone
 
-  
 # Secret key for generating sessions. Will be generated if empty
 # particiApiClientSecret: 
 
