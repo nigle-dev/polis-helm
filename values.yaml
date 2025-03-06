@@ -14,6 +14,7 @@ polis:
 particiApi:
   # Hostname for the particiapi frontend
   host: polis-helm--api
+  secretKey: 123456
   # Domainname particiapi is running in
   domain: n8m.nl
   # 
@@ -22,6 +23,8 @@ particiApi:
   idpClientID: test
   idpClientSecret: test
 
+
+# postgres variables
 postgresql:
   enabled: true
   auth:
@@ -33,9 +36,6 @@ postgresql:
   architecture: standalone
 
   
-
-
-
 # Secret key for generating sessions. Will be generated if empty
 # particiApiClientSecret: 
 
@@ -96,7 +96,7 @@ service:
 ingresses:
   enabled: true
   ingress:
-    - name: ingress-1
+    - name: polis-server
       ingressClassName: "nginx"
       annotations:
         cert-manager.io/issuer: letsencrypt-production

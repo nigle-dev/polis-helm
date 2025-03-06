@@ -26,6 +26,9 @@ spec:
       - envFrom:
         - configMapRef:
             name: polis-configmap
+        env:
+        - name: DEV_MODE
+          value: "false"
         image: nigledev/polis-server:latest
         imagePullPolicy: Always
         livenessProbe:
