@@ -17,8 +17,8 @@ polis:
 
 particiApi:
   # Hostname for the particiapi frontend
-  host: polis-helm--api
-  secretKey: "123456"
+  host: polis-helm-api
+  secretKey:
   # Domainname particiapi is running in
   domain: n8m.nl
   # 
