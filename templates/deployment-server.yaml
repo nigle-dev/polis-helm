@@ -29,7 +29,7 @@ spec:
         env:
         - name: DEV_MODE
           value: "false"
-        image: registry.gitlab.com/particiapp/polis/file-server:latest
+        image: registry.gitlab.com/particiapp/polis/server:latest
         imagePullPolicy: Always
         livenessProbe:
           exec:
@@ -43,7 +43,7 @@ spec:
         name: polis-server
         ports:
         - containerPort: 8080
-          name: http
+          name: polis
           protocol: TCP
         resources:
           requests:
