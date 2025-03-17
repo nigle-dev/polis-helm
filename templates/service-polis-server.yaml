@@ -9,7 +9,7 @@ spec:
   - name: polis
     port: 5000
     protocol: TCP
-    targetPort: 8080
+    targetPort: 5000
   selector:
     name: polis-server
   sessionAffinity: None
