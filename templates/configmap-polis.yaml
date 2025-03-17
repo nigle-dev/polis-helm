@@ -7,7 +7,7 @@ data:
   PARTICIAPI_HOSTNAME: {{ .Values.particiApi.host | quote }}
   PARTICIAPI_DOMAINNAME: {{ .Values.particiApi.domain | quote }}
   PARTICIAPI_SECRET_KEY: "UJdBgor8luqw-PpoN4pRLy1ZIjWIKw7WMRUDL-YfjT4S"
-  PARTICIAPI_CORS_ORIGINS: {{ .Values.particiApiCors | quote }}
+  PARTICIAPI_CORS_ORIGINS: {{ .Values.particiApi.cors | quote }}
   PARTICIAPI_IDP_API_BASE_URL: "https://idp.partici.app/realms/pzh"
   PARTICIAPI_IDP_CLIENT_ID: "particiapi"
   PARTICIAPI_IDP_CLIENT_SECRET: {{ .Values.particiApiClientSecret | default (randAlphaNum 32) | quote }}
@@ -21,4 +21,6 @@ data:
   DOMAIN_OVERRIDE: {{ printf "%s.%s" .Values.polis.host .Values.polis.domain }}
   API_PROD_HOSTNAME: {{ printf "%s.%s" .Values.polis.host .Values.polis.domain }}
   EMBED_SERVICE_HOSTNAME: {{ printf "%s.%s" .Values.polis.host .Values.polis.domain }}
+  POLIS_SERVER_NAME: {{ printf "%s.%s" .Values.polis.host .Values.polis.domain }}
+
   

@@ -18,11 +18,11 @@ polis:
 particiApi:
   # Hostname for the particiapi frontend
   host: polis-helm-api
-  secretKey:
+  secretKey: "123456"
   # Domainname particiapi is running in
   domain: n8m.nl
-  # 
-  corsUrl: https://polis-helm-api.n8m.nl
+  # The API client origin for CORS. This is usually the client-frontend example.
+  cors: https://polis-helm-api.n8m.nl
   # Base URL for the OpenID-connect provider (where .well-known lives)
   idpUrl: https://sso.n8m.nl/realms/testurl
   # When using KeyCloak copy the values from ClienID and Secret here
