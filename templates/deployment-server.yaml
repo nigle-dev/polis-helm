@@ -29,7 +29,7 @@ spec:
         env:
         - name: DEV_MODE
           value: "false"
-        image: nigledev/polis-server:latest
+        image: registry.gitlab.com/particiapp/polis/file-server:latest
         imagePullPolicy: Always
         livenessProbe:
           exec:

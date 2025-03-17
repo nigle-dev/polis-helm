@@ -25,7 +25,7 @@ spec:
       - envFrom:
         - configMapRef:
             name: polis-configmap
-        image: registry.gitlab.com/particiapp/polis/file-server:20241015T230151Z_745851d
+        image: registry.gitlab.com/particiapp/polis/file-server
         imagePullPolicy: IfNotPresent
         livenessProbe:
           exec:
