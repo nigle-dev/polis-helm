@@ -6,7 +6,7 @@ metadata:
   name: polis-server
 spec:
   ports:
-  - name: http
+  - name: polis
     port: 5000
     protocol: TCP
     targetPort: 8080
