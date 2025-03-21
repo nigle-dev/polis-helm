@@ -17,27 +17,29 @@ polis:
 
 particiApi:
   # Hostname for the particiapi frontend
-  host: polis-helm-api
+  host: polis-particiapi
   secretKey: "123456"
   # Domainname particiapi is running in
   domain: n8m.nl
   # The API client origin for CORS. This is usually the client-frontend example.
-  cors: https://polis-helm-api.n8m.nl
+  cors: https://polis-frontend.n8m.nl
   # Base URL for the OpenID-connect provider (where .well-known lives)
-  idpUrl: https://sso.n8m.nl/realms/testurl
+  idpUrl: https://sso.n8m.nl/realms/particiapp
   # When using KeyCloak copy the values from ClienID and Secret here
-  idpClientID: test
-  idpClientSecret: test
-
+  idpClientID: particiapi
+  idpClientSecret: bOUFWoaYd7SP4VATmumcDo4sxrxb1UkS
 
 # postgres variables
 postgresql:
+  # set to true to enable a postgresql deployment. Set to false to use an existing postgresql server
   enabled: true
   auth:
     username: polis
     password: "123456"
     database: polisdb
+    # set to external hostname when using existing postgresql server, otherwise leave at polis-postgres
     hostname: polis-postgres
+    # not yet being used
     existingSecret: ""
   architecture: standalone
 
@@ -101,6 +103,7 @@ service:
 ingresses:
   enabled: true
   ingress:
+    # Ingress for the polis server
     - name: polis-server
       ingressClassName: "nginx"
       annotations:
@@ -122,6 +125,50 @@ ingresses:
                   name: "polis-server"
                   port:
                     number: 5000
+    # Ingress for the particiapi server
+    - name: particiapi
+      ingressClassName: "nginx"
+      annotations:
+        cert-manager.io/issuer: letsencrypt-production
+        cert-manager.io/issuer-kind: ClusterIssuer
+      tls:
+        - hosts: 
+          - polis-particiapi.n8m.nl
+          secretName: tls-polis-particiapi-n8m.nl
+      rules:
+        - hosts: 
+            "polis-particiapi.n8m.nl"            
+          http:
+            paths:
+            - path: /
+              pathType: Prefix
+              backend:
+                service:
+                  name: "particiapi"
+                  port:
+                    number: 8000
+    # Ingress for the client frontend
+    - name: polis-frontend
+      ingressClassName: "nginx"
+      annotations:
+        cert-manager.io/issuer: letsencrypt-production
+        cert-manager.io/issuer-kind: ClusterIssuer
+      tls:
+        - hosts: 
+          - polis-frontend.n8m.nl
+          secretName: tls-polis-frontend-n8m.nl
+      rules:
+        - hosts: 
+            "polis-frontend.n8m.nl"            
+          http:
+            paths:
+            - path: /
+              pathType: Prefix
+              backend:
+                service:
+                  name: "polis-frontend"
+                  port:
+                    number: 80
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
