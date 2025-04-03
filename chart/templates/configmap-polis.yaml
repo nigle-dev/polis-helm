@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: polis-configmap
+data:
+  POSTGRES_PASSWORD: {{ .Values.postgresql.auth.password | default (randAlphaNum 16) | quote }}
+  PARTICIAPI_HOSTNAME: {{ .Values.particiApi.host | quote }}
+  PARTICIAPI_DOMAINNAME: {{ .Values.particiApi.domain | quote }}
+  PARTICIAPI_SECRET_KEY: "UJdBgor8luqw-PpoN4pRLy1ZIjWIKw7WMRUDL-YfjT4S"
+  PARTICIAPI_CORS_ORIGINS: {{ .Values.particiApi.cors | quote }}
+  PARTICIAPI_IDP_API_BASE_URL: {{ .Values.particiApi.idpUrl | quote }}
+  PARTICIAPI_IDP_CLIENT_ID: "particiapi"
+  PARTICIAPI_IDP_CLIENT_SECRET: {{ .Values.particiApi.idpClientSecret | quote }}
+  DATABASE_URL: {{ printf "postgres://%s:%s@%s:5432/%s" .Values.postgresql.auth.username .Values.postgresql.auth.password 
+                  .Values.postgresql.auth.hostname .Values.postgresql.auth.database }}
+  POSTGRES_USER: {{ .Values.postgresql.auth.username | default "postgres" }}
+  POSTGRES_DB: {{ .Values.postgresql.auth.database | default "polis" }}
+  POSTGRES_HOST: polis-postgres
+  MATH_ENV: {{ .Values.polis.mathenv | default "prod" }}
+  STATIC_FILES_HOST: polis-file-server
+  DOMAIN_OVERRIDE: {{ printf "%s.%s" .Values.polis.host .Values.polis.domain }}
+  API_PROD_HOSTNAME: {{ printf "%s.%s" .Values.polis.host .Values.polis.domain }}
+  EMBED_SERVICE_HOSTNAME: {{ printf "%s.%s" .Values.polis.host .Values.polis.domain }}
+  POLIS_SERVER_NAME: {{ printf "%s.%s" .Values.polis.host .Values.polis.domain }}
+  PARTICIAPI_SERVER_NAME: {{ printf "%s.%s" .Values.particiApi.host .Values.particiApi.domain }}
+  PARTICIAPI_DATABASE_USER: {{ .Values.postgresql.auth.username | default "postgres" }}
+  PARTICIAPI_DATABASE_PASSWORD: {{ .Values.postgresql.auth.password | quote }}
+  PARTICIAPI_DATABASE_PORT: "5432"
+  PARTICIAPI_DATABASE_HOST: polis-postgres
+  PARTICIAPI_DATABASE_NAME: {{ .Values.postgresql.auth.database | default "polis" }} 
+
