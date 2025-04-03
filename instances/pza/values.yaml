@@ -5,7 +5,7 @@
 polis:
   # 
   host: polis-helm
-  domain: n8m.nl
+  domain: smoose.cloud
   # true or false, false if not specified
   devmode:
   # can be prod, preprod or dev. prod if not specified
@@ -20,9 +20,9 @@ particiApi:
   host: polis-particiapi
   secretKey: "123456"
   # Domainname particiapi is running in
-  domain: n8m.nl
+  domain: smoose.cloud
   # The API client origin for CORS. This is usually the client-frontend example.
-  cors: https://polis-frontend.n8m.nl
+  cors: https://polis-frontend.smoose.cloud
   # Base URL for the OpenID-connect provider (where .well-known lives)
   idpUrl: https://sso.n8m.nl/realms/particiapp
   # When using KeyCloak copy the values from ClienID and Secret here
@@ -111,11 +111,11 @@ ingresses:
         cert-manager.io/issuer-kind: ClusterIssuer
       tls:
         - hosts: 
-          - polis-helm.n8m.nl
-          secretName: tls-polis-helm-n8m.nl
+          - polis-helm.smoose.cloud
+          secretName: tls-polis-helm-smoose.cloud
       rules:
         - hosts: 
-            "polis-helm.n8m.nl"            
+            "polis-helm.smoose.cloud"            
           http:
             paths:
             - path: /
@@ -133,11 +133,11 @@ ingresses:
         cert-manager.io/issuer-kind: ClusterIssuer
       tls:
         - hosts: 
-          - polis-particiapi.n8m.nl
-          secretName: tls-polis-particiapi-n8m.nl
+          - polis-particiapi.smoose.cloud
+          secretName: tls-polis-particiapi-smoose.cloud
       rules:
         - hosts: 
-            "polis-particiapi.n8m.nl"            
+            "polis-particiapi.smoose.cloud"            
           http:
             paths:
             - path: /
@@ -155,11 +155,11 @@ ingresses:
         cert-manager.io/issuer-kind: ClusterIssuer
       tls:
         - hosts: 
-          - polis-frontend.n8m.nl
-          secretName: tls-polis-frontend-n8m.nl
+          - polis-frontend.smoose.cloud
+          secretName: tls-polis-frontend-smoose.cloud
       rules:
         - hosts: 
-            "polis-frontend.n8m.nl"            
+            "polis-frontend.smoose.cloud"            
           http:
             paths:
             - path: /
