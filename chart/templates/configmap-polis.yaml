@@ -28,4 +28,4 @@ data:
   PARTICIAPI_DATABASE_PORT: "5432"
   PARTICIAPI_DATABASE_HOST: polis-postgres
   PARTICIAPI_DATABASE_NAME: {{ .Values.postgresql.auth.database | default "polis" }} 
-
+  PGDATA: /var/lib/postgresql/data/pgdata
